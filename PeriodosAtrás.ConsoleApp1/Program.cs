@@ -4,11 +4,11 @@ namespace PeriodosAtrás.ConsoleApp1
 {
     internal class Program
     {        
-        static void Main(string[] args)
+        static void Main()
         {
-            Data data = new Data();
+            Data data = new();
             data.memorias = new Memoria[10];
-            Memoria memoria = new Memoria();
+            
             string opcao = "";
             while (opcao != "sair")
             {
@@ -23,7 +23,7 @@ namespace PeriodosAtrás.ConsoleApp1
                 }
                 else if (opcao == "ver")
                 {
-                    data.EscreveDatas();                    
+                    data.VerDatas();                    
                     continue;
                 }                
                 data.EscreveResultado();

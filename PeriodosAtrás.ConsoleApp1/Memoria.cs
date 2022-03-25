@@ -10,5 +10,6 @@ namespace PeriodosAtrás.ConsoleApp1
     {
         public string armazenamento;
         
+        
     }
 }
