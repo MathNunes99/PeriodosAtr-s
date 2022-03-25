@@ -20,7 +20,7 @@ namespace PeriodosAtrás.ConsoleApp1
         public int CalculaResposta()
         {
             TimeSpan diferenca = DateTime.Today - Convert.ToDateTime(dataDigitada);            
-
+            
             return diferenca.Days;
         }
         public void EscreveResultado()
@@ -42,6 +42,13 @@ namespace PeriodosAtrás.ConsoleApp1
             int semana = 0;
             int mes = 0;
             int ano = 0;
+
+            if (dias == 0)
+            {               
+                    TimeSpan diferenca = DateTime.UtcNow.AddHours(-3) - Convert.ToDateTime(dataDigitada);
+                resultado = diferenca.Hours + " Horas atrás";
+                return resultado;
+            }
             while (dias > 0)
             {
                 if (dias >= 365)
@@ -65,26 +72,47 @@ namespace PeriodosAtrás.ConsoleApp1
                     dias--;
                 }                
             }
-
+            string convertido;
+            
+            
             if (ano > 0)
             {
-                resultado = ano + " Anos";
+                convertido = RetornaString(ano);
+                resultado = convertido + " Anos atrás";
+                if (mes > 0)
+                {
+                    convertido = RetornaString(mes);
+                    resultado += " e " + convertido + " Meses";
+                }
             }
             else if (mes > 0)
             {
-                resultado = mes + " meses Atrás";
+                convertido = RetornaString(mes);
+                resultado = convertido + " Meses atrás";
+                if (semana > 0)
+                {
+                    convertido = RetornaString(semana);
+                    resultado += " e " + convertido + " Semanas";
+                }
             }
             else if (semana > 0)
             {
-                resultado = semana + " semanas Atrás";                
+                convertido = RetornaString(semana);
+                resultado = convertido + " Semanas atrás";
+                if (diasCont > 0)
+                {
+                    convertido = RetornaString(diasCont);
+                    resultado += " e " + convertido + " Dias";
+                }
             }           
             else if(diasCont < 7)
             {
-                resultado = diasCont + " Dias Atrás";
+                convertido = RetornaString(diasCont);
+                resultado = convertido + " Dias atrás";
             }
 
             return resultado;
-        }
+        }       
         public void ArmazenaNaMemoria()
         {
             Memoria armazenador = new();
@@ -93,6 +121,44 @@ namespace PeriodosAtrás.ConsoleApp1
             int posicaoVazia = PosicaoVazia();
             memorias[posicaoVazia] = armazenador;
             
+        }
+        public string RetornaString(int conversor)
+        {
+            string converterString = "";            
+            switch (conversor)
+            {
+                case 1:
+                    converterString = "Um";
+                    break;
+                case 2:
+                    converterString = "Dois";
+                    break;
+                case 3:
+                    converterString = "Três";
+                    break;
+                case 4:
+                    converterString = "Quatro";
+                    break;
+                case 5:
+                    converterString = "Cinco";
+                    break;
+                case 6:
+                    converterString = "Seis";
+                    break;
+                case 7:
+                    converterString = "Sete";
+                    break;
+                case 8:
+                    converterString = "Oito";
+                    break;
+                case 9:
+                    converterString = "Nove";
+                    break;
+                case 10:
+                    converterString = "Dez";
+                    break;
+            }
+            return converterString;
         }
         public int PosicaoVazia()
         {
